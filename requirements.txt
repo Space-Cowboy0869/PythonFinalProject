@@ -1,0 +1,5 @@
+PyQt6>=6.5
+SQLAlchemy>=1.4
+PyMySQL>=1.0
+python-dotenv>=1.0
+Werkzeug>=2.0
