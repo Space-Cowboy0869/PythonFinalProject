@@ -31,7 +31,8 @@ class LoginWindow(QWidget):
             }
 
             QFrame#LeftPanel {
-                background-color: #1677ff;
+                background-color: #000000
+
             }
 
             QLabel#SystemTitle {
