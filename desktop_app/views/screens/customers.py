@@ -6,7 +6,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from sqlalchemy import func, desc
 
-from ...database import db_session
+from ...controllers import db_session
 from ...models import Transaction
 from ...utils.helpers import format_currency, load_icon
 from ..dialogs.receipt_dialog import ReceiptDialog

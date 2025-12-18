@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QFont, QColor
 from ...models import Product, Category
-from ...database import db_session
+from ...controllers import db_session
 from ...utils.helpers import get_icon_path, format_currency, uploads_path, copy_image_to_uploads, load_icon
 import os
 from datetime import datetime

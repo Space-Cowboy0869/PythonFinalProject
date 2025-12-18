@@ -74,9 +74,10 @@ def ensure_schema():
             if 'created_at' not in cols:
                 conn.execute(text('ALTER TABLE users ADD COLUMN created_at DATETIME'))
 
+
 def init_db():
     # Import all models here to ensure they are registered with SQLAlchemy
-    from .models import User, Product, Category, Transaction, TransactionItem, StockChange
+    from ..models import User, Product, Category, Transaction, TransactionItem, StockChange
     
     # Create all tables
     Base.metadata.create_all(bind=engine)
@@ -95,6 +96,7 @@ def init_db():
         )
         db_session.add(admin)
         db_session.commit()
+
 
 class BaseModel:
     """Base model class that provides common functionality."""

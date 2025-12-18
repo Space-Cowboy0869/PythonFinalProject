@@ -2,7 +2,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, Enum, ForeignKey, Numeric
 from sqlalchemy.orm import relationship
-from .database import Base, db_session
+from ..controllers.database import Base, db_session
 
 class User(Base):
     __tablename__ = 'users'

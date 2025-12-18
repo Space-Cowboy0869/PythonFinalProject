@@ -22,7 +22,7 @@ from sqlalchemy import func
 import os
 from decimal import Decimal
 
-from ...database import db_session
+from ...controllers import db_session
 from ...models import Category, Product, Transaction, TransactionItem, StockChange
 from ...utils.helpers import (
     format_currency,
@@ -120,8 +120,8 @@ class SalesScreen(QWidget):
         self.cart_table.setAlternatingRowColors(True)
         right.addWidget(self.cart_table, 1)
 
-        self.vatable_sales_label = QLabel("VATable Sales: $0.00")
-        self.vat_amount_label = QLabel(f"VAT ({int(PH_VAT_RATE * 100)}%): $0.00")
+        self.vatable_sales_label = QLabel(f"VATable Sales: {format_currency(0)}")
+        self.vat_amount_label = QLabel(f"VAT ({int(PH_VAT_RATE * 100)}%): {format_currency(0)}")
         self.vatable_sales_label.setStyleSheet("font-size: 12px;")
         self.vat_amount_label.setStyleSheet("font-size: 12px;")
 
@@ -137,8 +137,9 @@ class SalesScreen(QWidget):
 
         totals_row = QHBoxLayout()
         totals_row.addStretch()
-        self.total_label = QLabel("Total: $0.00")
-        self.total_label.setStyleSheet("font-size: 18px; font-weight: bold;")
+        self.total_label = QLabel(f"Total: {format_currency(0)}")
+        self.total_label.setStyleSheet("font-size: 22px; font-weight: 800; color: #00b050;")
+        self.total_label.setAlignment(Qt.AlignmentFlag.AlignRight)
         totals_row.addWidget(self.total_label)
         right.addLayout(totals_row)
 

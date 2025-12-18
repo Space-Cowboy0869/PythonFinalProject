@@ -8,7 +8,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from sqlalchemy import desc
 
-from ...database import db_session
+from ...controllers import db_session
 from ...models import User, StockChange
 from ...utils.helpers import load_icon
 from ..widgets import (

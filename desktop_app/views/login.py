@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import (
+﻿from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
     QLineEdit, QPushButton, QMessageBox,
     QFrame
@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, pyqtSignal, QPropertyAnimation, QEasingCurve, QPoint
 from PyQt6.QtGui import QPixmap
 from ..models import User
-from ..database import db_session
+from ..controllers import db_session
 from ..utils.helpers import get_icon_path, load_icon
 
 
@@ -16,7 +16,7 @@ class LoginWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.quit_on_close = True
-        self.setWindowTitle("POS System – Login")
+        self.setWindowTitle("POS System ΓÇô Login")
         self.setFixedSize(720, 420)
 
         self.setup_ui()

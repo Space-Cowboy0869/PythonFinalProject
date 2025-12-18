@@ -115,14 +115,13 @@ def copy_image_to_uploads(source_path: str) -> str:
 def format_currency(amount) -> str:
     try:
         if amount is None:
-            return "$0.00"
-        if isinstance(amount, Decimal):
-            value = float(amount)
-        else:
-            value = float(amount)
-        return f"${value:,.2f}"
+            return "₱0.00"
+        # Use Decimal rounding to avoid floating point surprises
+        dec = round_money(amount)
+        value = float(dec)
+        return f"₱{value:,.2f}"
     except Exception:
-        return "$0.00"
+        return "₱0.00"
 
 
 PH_VAT_RATE = Decimal("0.12")

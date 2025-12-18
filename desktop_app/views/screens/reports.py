@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (
     QHeaderView,
     QAbstractItemView,
     QMessageBox,
+    QComboBox,
     QDateEdit,
     QFileDialog,
 )
@@ -19,7 +20,7 @@ from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtGui import QIcon
 from sqlalchemy import func, desc
 
-from ...database import db_session
+from ...controllers import db_session
 from ...models import Product, Transaction, TransactionItem
 from ...utils.helpers import format_currency, get_icon_path, load_icon
 
@@ -70,16 +71,25 @@ class ReportsScreen(QWidget):
         controls.addWidget(self.from_date)
         controls.addWidget(QLabel("To:"))
         controls.addWidget(self.to_date)
+        # Top N selector
+        controls.addWidget(QLabel("Top:"))
+        self.top_n = QComboBox()
+        self.top_n.addItem("Top 5", 5)
+        self.top_n.addItem("Top 10", 10)
+        self.top_n.addItem("Top 15", 15)
+        self.top_n.addItem("Top 25", 25)
+        self.top_n.setCurrentIndex(2)  # default Top 15
+        controls.addWidget(self.top_n)
         controls.addStretch()
         controls.addWidget(self.refresh_btn)
         controls.addWidget(self.export_btn)
         layout.addLayout(controls)
 
         metrics = QHBoxLayout()
-        self.total_sales_label = QLabel("Total Sales: $0.00")
+        self.total_sales_label = QLabel(f"Total Sales: {format_currency(0)}")
         self.total_orders_label = QLabel("Orders: 0")
-        self.avg_order_label = QLabel("Avg Order: $0.00")
-        self.total_profit_label = QLabel("Profit: $0.00")
+        self.avg_order_label = QLabel(f"Avg Order: {format_currency(0)}")
+        self.total_profit_label = QLabel(f"Profit: {format_currency(0)}")
         for w in (self.total_sales_label, self.total_orders_label, self.avg_order_label, self.total_profit_label):
             w.setStyleSheet("font-size: 16px; font-weight: bold;")
             metrics.addWidget(w)
@@ -232,7 +242,7 @@ class ReportsScreen(QWidget):
                 .filter(Transaction.created_at >= start_dt, Transaction.created_at < end_dt)
                 .group_by(Product.id, Product.name)
                 .order_by(desc(func.sum(TransactionItem.qty)))
-                .limit(15)
+                .limit(int(self.top_n.currentData() or 15))
                 .all()
             )
             self.top_products.setRowCount(len(top))
@@ -327,9 +337,9 @@ class ReportsScreen(QWidget):
                         r.sku or "",
                         r.name or "",
                         int(r.qty or 0),
-                        f"{sales:.2f}",
-                        f"{cost:.2f}",
-                        f"{profit:.2f}",
+                        format_currency(sales),
+                        format_currency(cost),
+                        format_currency(profit),
                         f"{margin:.2f}",
                     ])
 
@@ -339,9 +349,9 @@ class ReportsScreen(QWidget):
                     "TOTAL",
                     "",
                     "",
-                    f"{total_sales:.2f}",
-                    f"{total_cost:.2f}",
-                    f"{total_profit:.2f}",
+                    format_currency(total_sales),
+                    format_currency(total_cost),
+                    format_currency(total_profit),
                     "",
                 ])
 

@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QFont
 from ...models import Transaction, Product
-from ...database import db_session
+from ...controllers import db_session
 from sqlalchemy import func, and_
 from datetime import datetime, timedelta
 from ...utils.helpers import format_currency, load_icon

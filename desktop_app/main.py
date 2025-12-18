@@ -5,9 +5,9 @@ from PyQt6.QtCore import QSettings, Qt
 from PyQt6.QtGui import QIcon
 
 # Import application modules
-from .database import init_db, db_session
-from .auth.login import LoginWindow
-from .ui.main_window import MainWindow
+from .controllers import init_db, db_session
+from .views.login import LoginWindow
+from .views.main_window import MainWindow
 from .utils.helpers import get_icon_path, load_icon
 
 class POSApp(QApplication):

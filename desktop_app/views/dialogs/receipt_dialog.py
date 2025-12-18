@@ -3,7 +3,7 @@ from PyQt6.QtPrintSupport import QPrinter, QPrintDialog
 from PyQt6.QtCore import Qt
 from decimal import Decimal
 import html
-from ...database import db_session
+from ...controllers import db_session
 from ...models import Transaction
 from ...utils.helpers import format_currency, compute_ph_vat_breakdown, PH_VAT_RATE
 
