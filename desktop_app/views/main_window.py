@@ -279,17 +279,7 @@ class MainWindow(QMainWindow):
         toggle_sidebar_action.setIcon(load_icon("menu.png"))
         toggle_sidebar_action.triggered.connect(self.toggle_sidebar)
 
-        new_sale_action = QAction("🛒 New Sale", self)
-        new_sale_action.setIcon(load_icon("new_sale.png"))
-        new_sale_action.triggered.connect(self.new_sale)
-
-        add_product_action = QAction("➕ Add Product", self)
-        add_product_action.setIcon(load_icon("add_product.png"))
-        add_product_action.triggered.connect(self.add_product)
-
-        settings_action = QAction("⚙️  Settings", self)
-        settings_action.setIcon(load_icon("settings.png"))
-        settings_action.triggered.connect(self.show_settings)
+        # Top-level actions (removed: New Sale, Add Product, Settings)
 
         self.page_title_label = QLabel("Dashboard")
         title_font = self.page_title_label.font()
@@ -305,10 +295,6 @@ class MainWindow(QMainWindow):
         toolbar.addSeparator()
         toolbar.addWidget(self.page_title_label)
         toolbar.addWidget(spacer)
-        toolbar.addAction(new_sale_action)
-        toolbar.addAction(add_product_action)
-        toolbar.addSeparator()
-        toolbar.addAction(settings_action)
 
         return toolbar
 
